@@ -1,0 +1,38 @@
+﻿@page
+@model QuizModel
+
+@if (Model.IsQuizComplete)
+{
+    <div class="alert alert-success">Quiz complete! Well done.</div>
+}
+else if (Model.CurrentQuestion != null)
+{
+    <form method="post">
+        <h2>@Model.Quiz.Title</h2>
+
+        <div>
+            <p>@Model.CurrentQuestion.QuestionText</p>
+            @for (int i = 0; i < Model.CurrentQuestion.Answers.Count; i++)
+            {
+                <div class="form-group">
+                    <input type="radio" asp-for="SelectedAnswer" value="@i" name="SelectedAnswer" />
+                    <label>@Model.CurrentQuestion.Answers[i].AnswerText</label>
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+}
+
+
+@if (Model.FeedbackMessage != null)
+{
+    <div class="alert @(Model.IsCorrectAnswer.Value ? "alert-success" : "alert-danger")">
+        @Model.FeedbackMessage
+        @if (!Model.IsQuizComplete)
+        {
+            <button onclick="location.reload();" class="btn btn-secondary mt-2">Next Question</button>
+        }
+    </div>
+}
