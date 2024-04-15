@@ -55,6 +55,7 @@ public class QuizModel : PageModel
 
         if (IsCorrectAnswer == true)
         {    
+            
             _stateManager.AdvanceToNextQuestion();
             // Prepare for the next question or end of quiz
             if (_stateManager.GetCurrentQuestionIndex() < Quiz.Questions.Count)
@@ -65,7 +66,7 @@ public class QuizModel : PageModel
             else
             {
                 // Quiz completion logic
-                _stateManager.ResetQuiz(); // Optional: Reset for a new round
+                //_stateManager.ResetQuiz(); // Optional: Reset for a new round
                 FeedbackMessage = "Congratulations, you've completed the quiz!";
                 Console.Write("FeedbackMessage"); 
                 return Page();
@@ -77,5 +78,11 @@ public class QuizModel : PageModel
             FeedbackMessage = $"Incorrect. The correct answer was \"{currentQuestion.Answers.FirstOrDefault(a => a.IsCorrect)?.AnswerText}\".";
             return Page(); // Stay on the current question
         }
+    }
+
+    public IActionResult OnPostReset()
+    {
+        _stateManager.ResetQuiz();
+        return RedirectToPage();
     }
 }

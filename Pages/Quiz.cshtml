@@ -1,11 +1,7 @@
 ﻿@page
 @model QuizModel
 
-@if (Model.IsQuizComplete)
-{
-    <div class="alert alert-success">Quiz complete! Well done.</div>
-}
-else if (Model.CurrentQuestion != null)
+@if (Model.CurrentQuestion != null)
 {
     <form method="post">
         <h2>@Model.Quiz.Title</h2>
@@ -25,14 +21,18 @@ else if (Model.CurrentQuestion != null)
     </form>
 }
 
-
-@if (Model.FeedbackMessage != null)
+@if (Model.FeedbackMessage != null && !Model.IsQuizComplete)
 {
     <div class="alert @(Model.IsCorrectAnswer.Value ? "alert-success" : "alert-danger")">
+    @Model.FeedbackMessage
+    </div>
+}
+else @if (Model.IsQuizComplete)
+{
+    <div class="alert alert-success">
         @Model.FeedbackMessage
-        @if (!Model.IsQuizComplete)
-        {
-            <button onclick="location.reload();" class="btn btn-secondary mt-2">Next Question</button>
-        }
+        <form method="post" asp-page-handler="Reset">
+        <button type="sumbit" class="btn btn-primary">Reset Quiz</button>
+        </form>
     </div>
 }
