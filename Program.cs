@@ -13,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+// Configure Logging
+builder.Logging.ClearProviders();
+builder.Logging.AddDebug();
+
 // Register your custom services with the DI container.
 builder.Services.AddTransient<QuizService>();
 builder.Services.AddScoped<QuizStateManager>();
