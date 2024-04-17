@@ -17,8 +17,9 @@ builder.Services.AddRazorPages();
 builder.Logging.ClearProviders();
 builder.Logging.AddDebug();
 
-// Register your custom services with the DI container.
-builder.Services.AddTransient<QuizService>();
+// Register services with DI container.
+
+builder.Services.AddSingleton<QuizService>();
 builder.Services.AddScoped<QuizStateManager>();
 builder.Services.AddScoped<QuizEvaluator>();
 

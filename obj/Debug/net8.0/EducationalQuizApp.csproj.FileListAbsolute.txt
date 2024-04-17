@@ -29,3 +29,6 @@ C:\Users\abdill\source\repos\EducationalQuizWebApp\EducationalQuizApp\obj\Debug\
 C:\Users\abdill\source\repos\EducationalQuizWebApp\EducationalQuizApp\obj\Debug\net8.0\EducationalQuizApp.genruntimeconfig.cache
 C:\Users\abdill\source\repos\EducationalQuizWebApp\EducationalQuizApp\obj\Debug\net8.0\ref\EducationalQuizApp.dll
 C:\Users\abdill\source\repos\EducationalQuizWebApp\EducationalQuizApp\obj\Debug\net8.0\EducationalQuizApp.sourcelink.json
+C:\Users\abdill\source\repos\EducationalQuizWebApp\EducationalQuizApp\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\abdill\source\repos\EducationalQuizWebApp\EducationalQuizApp\obj\Debug\net8.0\EducationalQuizApp.csproj.AssemblyReference.cache
+C:\Users\abdill\source\repos\EducationalQuizWebApp\EducationalQuizApp\obj\Debug\net8.0\Educatio.0D929143.Up2Date

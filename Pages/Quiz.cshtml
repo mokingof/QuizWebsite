@@ -4,9 +4,10 @@
 @if (Model.CurrentQuestion != null)
 {
     <form method="post">
+        <input type="hidden" asp-for="quizCategory" />
         <h2>@Model.Quiz.Title</h2>
-
-        @*<div>
+        
+        <div>
             <p>@Model.CurrentQuestion.QuestionText</p>
             @for (int i = 0; i < Model.CurrentQuestion.Answers.Count; i++)
             {
@@ -20,10 +21,12 @@
         @if(Model.FeedbackMessage == null)
         {
             <button type="submit" class="btn btn-primary">Submit</button>
-        }*@
+        }
       
     </form>
 }
+
+
 
 @if (Model.FeedbackMessage != null && !Model.IsQuizComplete)
 {    
@@ -47,3 +50,4 @@ else @if (Model.IsQuizComplete)
         </form>
     </div>
 }
+

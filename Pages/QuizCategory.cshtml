@@ -1,0 +1,15 @@
+﻿@page
+@model QuizCategoryModel
+@{
+    <h2>Select a Quiz Category</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select asp-for="SelectedCategory" asp-items="@(new SelectList(Model.Categories))" class="form-control" id="category">
+                <option value="">Please select a category</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Start Quiz</button>
+    </form>
+}

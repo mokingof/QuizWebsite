@@ -1,4 +1,7 @@
-﻿namespace EducationalQuizApp.Services
+﻿using EducationalQuizApp.Model;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+namespace EducationalQuizApp.Services
 {
     public class QuizStateManager
     {

@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets\\EducationalQuizApp.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\Images\\Screenshot 2024-04-16 211803.png",
+      "PackagePath": "staticwebassets\\Images\\Screenshot 2024-04-16 211803.png"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\Images\\Screenshot 2024-04-16 211831.png",
+      "PackagePath": "staticwebassets\\Images\\Screenshot 2024-04-16 211831.png"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\Images\\Screenshot 2024-04-16 211903.png",
+      "PackagePath": "staticwebassets\\Images\\Screenshot 2024-04-16 211903.png"
+    },
+    {
       "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

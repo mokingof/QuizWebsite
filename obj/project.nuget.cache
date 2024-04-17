@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "jInjdWoPJGPLPcbCAByhafuR4KKLsHYu8H61WZxxWOkLqy6aoeyMcPQ7Cc9cP3zcA0Bju2fwHoZXWUGP3n1KZg==",
+  "dgSpecHash": "EeqXCQjXq4XlrSxcxRP7Cjp4fj6fsWqvt+jwquLFyrq4luiIRD+gjpSvphlny/6YirmSc+d6hOgHwBRBuVK2vg==",
   "success": true,
   "projectFilePath": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\EducationalQuizApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\abdill\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

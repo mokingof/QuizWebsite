@@ -18,11 +18,13 @@ public class QuizModel : PageModel
     public int SelectedAnswer { get; set; }
 
     // Properties to hold quiz data and state
+    
     public Quiz Quiz { get; set; }
     public Question CurrentQuestion => Quiz.Questions.ElementAtOrDefault(_stateManager.GetCurrentQuestionIndex());
     public bool? IsCorrectAnswer { get; set; } = null;
     public string FeedbackMessage { get; set; }
-    public int score {  get; set; }
+    public int score { get; set; }
+    public string quizCategory { get; set; }
     public bool IsQuizComplete => _stateManager.GetCurrentQuestionIndex() >= Quiz.Questions.Count;
 
     // Constructor with dependency injection
@@ -35,10 +37,11 @@ public class QuizModel : PageModel
 
     }
 
-    public void OnGet()
+    public void OnGet(string category)
     {
         // Initialize or load the Quiz object
-        Quiz = _quizService.GetSampleQuiz();
+        quizCategory = category;
+        Quiz = _quizService.GetQuizByCategory(category);
 
         // Check if we need to reset the quiz (e.g., starting over or first access)
         if (IsQuizComplete || Quiz == null)
@@ -49,22 +52,21 @@ public class QuizModel : PageModel
 
     public IActionResult OnPost()
     {
-        // Reload the quiz - consider optimizing this in a real application
-        Quiz = _quizService.GetSampleQuiz();
+      
+        Quiz = _quizService.GetQuizByCategory(quizCategory);
 
         var currentQuestionIndex = _stateManager.GetCurrentQuestionIndex();
         var currentQuestion = Quiz.Questions[currentQuestionIndex];
-        
+
 
         // Evaluate the answer
         IsCorrectAnswer = _evaluator.IsAnswerCorrect(currentQuestion, SelectedAnswer);
 
         if (IsCorrectAnswer == true)
         {
-           
             _stateManager.UpdateScore(1);
             _stateManager.AdvanceToNextQuestion();
-           
+
             // Prepare for the next question or end of quiz
             if (_stateManager.GetCurrentQuestionIndex() < Quiz.Questions.Count)
             {
@@ -76,7 +78,7 @@ public class QuizModel : PageModel
             {
                 score = _stateManager.GetCurrentScore();
                 FeedbackMessage = $"Quiz finished, you got {score}/ {Quiz.Questions.Count} questions right.";
-               
+
                 return Page();
             }
         }
@@ -85,7 +87,7 @@ public class QuizModel : PageModel
             // Incorrect answer, generate feedback
             FeedbackMessage = $"Incorrect. The correct answer was \"{currentQuestion.Answers.FirstOrDefault(a => a.IsCorrect)?.AnswerText}\".";
             return Page(); // Stay on the current question
-            
+
         }
     }
 
