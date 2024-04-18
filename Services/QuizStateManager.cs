@@ -1,4 +1,5 @@
 ﻿using EducationalQuizApp.Model;
+using EducationalQuizApp.Utilities;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 namespace EducationalQuizApp.Services
@@ -6,10 +7,42 @@ namespace EducationalQuizApp.Services
     public class QuizStateManager
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly QuizService _quizService;
 
-        public QuizStateManager(IHttpContextAccessor httpContextAccessor)
+        public QuizStateManager(IHttpContextAccessor httpContextAccessor, QuizService quizService)
         {
             _httpContextAccessor = httpContextAccessor;
+            _quizService = quizService;
+        }
+        public void SaveCurrentQuiz(Quiz quiz)
+        {
+            _httpContextAccessor.HttpContext.Session.Set("CurrentQuiz", quiz);
+        }
+
+        public Quiz GetCurrentQuiz()
+        {
+            return _httpContextAccessor.HttpContext.Session.Get<Quiz>("CurrentQuiz");
+        }
+        public void SetQuizCategory(string category)
+        {
+            _httpContextAccessor.HttpContext.Session.SetString("QuizCategory", category);
+            SaveCurrentQuiz(_quizService.GetQuizByCategory(category));
+        }
+
+        public string GetQuizCategory()
+        {
+            return _httpContextAccessor.HttpContext.Session.GetString("QuizCategory");
+        }
+
+        public void ClearQuizData()
+        {
+            _httpContextAccessor.HttpContext.Session.Remove("CurrentQuiz");
+            _httpContextAccessor.HttpContext.Session.Remove("QuizCategory");
+        }
+
+        public bool IsQuizDataAvailable()
+        {
+            return GetCurrentQuiz() != null;
         }
 
         public int GetCurrentQuestionIndex()
@@ -47,6 +80,8 @@ namespace EducationalQuizApp.Services
             var currentScore = GetCurrentScore();
             _httpContextAccessor.HttpContext.Session.SetInt32("CurrentScore", currentScore + scoreToAdd);
         }
+
+
 
     }
 

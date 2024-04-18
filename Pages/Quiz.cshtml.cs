@@ -13,82 +13,81 @@ public class QuizModel : PageModel
     private readonly QuizEvaluator _evaluator;
     private readonly ILogger<QuizModel> _logger;
 
-    // BindProperty attribute is used for properties that should receive their value from the request
     [BindProperty]
     public int SelectedAnswer { get; set; }
 
-    // Properties to hold quiz data and state
-    
-    public Quiz Quiz { get; set; }
-    public Question CurrentQuestion => Quiz.Questions.ElementAtOrDefault(_stateManager.GetCurrentQuestionIndex());
+    public Quiz Quiz
+    {
+        get => _stateManager.GetCurrentQuiz();
+        set => _stateManager.SaveCurrentQuiz(value);
+    }
+
+    public Question CurrentQuestion => Quiz?.Questions.ElementAtOrDefault(_stateManager.GetCurrentQuestionIndex());
     public bool? IsCorrectAnswer { get; set; } = null;
     public string FeedbackMessage { get; set; }
-    public int score { get; set; }
-    public string quizCategory { get; set; }
-    public bool IsQuizComplete => _stateManager.GetCurrentQuestionIndex() >= Quiz.Questions.Count;
+    public int Score { get; set; }
 
-    // Constructor with dependency injection
+    public string QuizCategory
+    {
+        get => _stateManager.GetQuizCategory();
+        set
+        {
+            if (value != _stateManager.GetQuizCategory())
+            {
+                _stateManager.SetQuizCategory(value);
+                Quiz = _quizService.GetQuizByCategory(value);  // Fetch new quiz based on changed category
+            }
+        }
+    }
+    public bool IsQuizComplete => _stateManager.GetCurrentQuestionIndex() >= Quiz?.Questions.Count;
+
     public QuizModel(QuizService quizService, QuizStateManager stateManager, QuizEvaluator evaluator, ILogger<QuizModel> logger)
     {
         _quizService = quizService;
         _stateManager = stateManager;
         _evaluator = evaluator;
         _logger = logger;
-
     }
 
     public void OnGet(string category)
     {
-        // Initialize or load the Quiz object
-        quizCategory = category;
-        Quiz = _quizService.GetQuizByCategory(category);
-
-        // Check if we need to reset the quiz (e.g., starting over or first access)
-        if (IsQuizComplete || Quiz == null)
+        if (!string.IsNullOrEmpty(category) && category != QuizCategory)
         {
-            _stateManager.ResetQuiz();
+            QuizCategory = category; // This sets and fetches the quiz based on the new category
         }
     }
 
     public IActionResult OnPost()
     {
-      
-        Quiz = _quizService.GetQuizByCategory(quizCategory);
+        if (Quiz == null)
+        {
+            _logger.LogError("Quiz data is missing on POST request.");
+            return RedirectToPage("/Error");
+        }
 
         var currentQuestionIndex = _stateManager.GetCurrentQuestionIndex();
         var currentQuestion = Quiz.Questions[currentQuestionIndex];
 
-
-        // Evaluate the answer
+        //Evaluate the answer
         IsCorrectAnswer = _evaluator.IsAnswerCorrect(currentQuestion, SelectedAnswer);
 
         if (IsCorrectAnswer == true)
         {
-            _stateManager.UpdateScore(1);
             _stateManager.AdvanceToNextQuestion();
-
-            // Prepare for the next question or end of quiz
-            if (_stateManager.GetCurrentQuestionIndex() < Quiz.Questions.Count)
+            _stateManager.UpdateScore(1);
+            if (_stateManager.GetCurrentQuestionIndex() >= Quiz.Questions.Count)
             {
-                // Redirect to refresh the page state for the next question       
-                return RedirectToPage();
-
-            }
-            else
-            {
-                score = _stateManager.GetCurrentScore();
-                FeedbackMessage = $"Quiz finished, you got {score}/ {Quiz.Questions.Count} questions right.";
-
+                Score = _stateManager.GetCurrentScore();
+                FeedbackMessage = $"Quiz finished, you got {Score} out of {Quiz.Questions.Count} questions right.";
                 return Page();
             }
         }
         else
-        {
-            // Incorrect answer, generate feedback
+        {   
             FeedbackMessage = $"Incorrect. The correct answer was \"{currentQuestion.Answers.FirstOrDefault(a => a.IsCorrect)?.AnswerText}\".";
-            return Page(); // Stay on the current question
-
         }
+
+        return Page();
     }
 
     // Resets Quiz

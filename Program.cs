@@ -24,7 +24,14 @@ builder.Services.AddScoped<QuizStateManager>();
 builder.Services.AddScoped<QuizEvaluator>();
 
 // This is required for using session state (which QuizStateManager might use).
-builder.Services.AddSession();
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(20);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 // Configure HTTP context accessor, required for accessing HttpContext in services.
 builder.Services.AddHttpContextAccessor();

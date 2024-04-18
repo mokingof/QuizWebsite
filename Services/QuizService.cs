@@ -54,8 +54,8 @@ namespace EducationalQuizApp.Services
                         QuestionText = "What is 10 - 6?",
                         Answers = new List<Answers>
                         {
+                            new Answers { AnswerText = "5", IsCorrect = true },
                             new Answers { AnswerText = "4", IsCorrect = true },
-                            new Answers { AnswerText = "5", IsCorrect = false },
                             new Answers { AnswerText = "3", IsCorrect = false }
                         }
                     },
@@ -82,8 +82,8 @@ namespace EducationalQuizApp.Services
                         QuestionText = "What planet is known as the Red Planet?",
                         Answers = new List<Answers>
                         {
+                            new Answers { AnswerText = "Jupitor", IsCorrect = true },
                             new Answers { AnswerText = "Mars", IsCorrect = true },
-                            new Answers { AnswerText = "Jupiter", IsCorrect = false },
                             new Answers { AnswerText = "Saturn", IsCorrect = false }
                         }
                     },
@@ -130,9 +130,9 @@ namespace EducationalQuizApp.Services
                         QuestionText = "What is the normal human body temperature in degrees Celsius?",
                         Answers = new List<Answers>
                         {
-                            new Answers { AnswerText = "37", IsCorrect = true },
+                            new Answers { AnswerText = "40", IsCorrect = true },
                             new Answers { AnswerText = "35", IsCorrect = false },
-                            new Answers { AnswerText = "40", IsCorrect = false }
+                            new Answers { AnswerText = "37", IsCorrect = true }
                         }
                     },
                     new Question
@@ -140,8 +140,8 @@ namespace EducationalQuizApp.Services
                         QuestionText = "Which vitamin is most commonly associated with citrus fruits?",
                         Answers = new List<Answers>
                         {
-                            new Answers { AnswerText = "Vitamin C", IsCorrect = true },
                             new Answers { AnswerText = "Vitamin D", IsCorrect = false },
+                            new Answers { AnswerText = "Vitamin C", IsCorrect = true },
                             new Answers { AnswerText = "Vitamin B12", IsCorrect = false }
                         }
                     }
