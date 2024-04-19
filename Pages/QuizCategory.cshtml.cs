@@ -7,37 +7,30 @@ namespace EducationalQuizApp.Pages
     public class QuizCategoryModel : PageModel
     {
         private readonly QuizService _quizService;
-        private readonly ILogger<QuizModel> _logger;
+        private readonly QuizManager _quizManager;
+   
 
-        public QuizCategoryModel(QuizService quizService)
+        public QuizCategoryModel(QuizService quizService, QuizManager _quizManager)
         {
             _quizService = quizService;
-          
+            _quizManager = _quizManager;
         }
 
-        public List<string> Categories { get; set; }
+        public List<string> QuizCategories { get; set; }
 
         [BindProperty]
         public string SelectedCategory { get; set; } // to store the selected category
 
         public void OnGet()
         {
-           // _logger.LogInformation($"The OnGet method, Retrieving Selected category:{SelectedCategory}");
-            Categories = _quizService.GetQuizCategories().ToList();
+            QuizCategories = _quizManager.GetCategories();
         }
 
         public IActionResult OnPost()
         {
-            // Check if the selected category is valid
-            if (!string.IsNullOrEmpty(SelectedCategory) && _quizService.GetQuizByCategory(SelectedCategory) != null)
-            {
-                // Redirect to the Quiz page with the selected category
-                return RedirectToPage("/Quiz", new { category = SelectedCategory });
-            }
-            // Handle the case where no valid category was selected
-            ModelState.AddModelError("", "Please select a valid category.");
-            Categories = _quizService.GetQuizCategories().ToList(); // Reload categories for the page
-            return Page();
+            // Redirect to the Quiz page with the selected category
+            return RedirectToPage("/Quiz", new { category = SelectedCategory });
+
         }
     }
 }

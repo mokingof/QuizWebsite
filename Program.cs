@@ -21,6 +21,7 @@ builder.Logging.AddDebug();
 
 builder.Services.AddSingleton<QuizService>();
 builder.Services.AddScoped<QuizStateManager>();
+builder.Services.AddScoped<QuizManager>();
 builder.Services.AddScoped<QuizEvaluator>();
 
 // This is required for using session state (which QuizStateManager might use).

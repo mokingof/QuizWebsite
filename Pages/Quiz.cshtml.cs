@@ -8,6 +8,8 @@ using System.Net.Sockets;
 
 public class QuizModel : PageModel
 {
+   
+    private readonly QuizManager _quizManager;
     private readonly QuizService _quizService;
     private readonly QuizStateManager _stateManager;
     private readonly QuizEvaluator _evaluator;
@@ -93,8 +95,9 @@ public class QuizModel : PageModel
     // Resets Quiz
     public IActionResult OnPostReset()
     {
-        _stateManager.ResetQuiz();
-        return RedirectToPage();
+        _stateManager.ClearQuizData();
+        return RedirectToPage("/QuizCategory");
+       
     }
 
     public IActionResult OnPostNextQuestion()

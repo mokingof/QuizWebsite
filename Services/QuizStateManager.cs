@@ -18,7 +18,6 @@ namespace EducationalQuizApp.Services
         {
             _httpContextAccessor.HttpContext.Session.Set("CurrentQuiz", quiz);
         }
-
         public Quiz GetCurrentQuiz()
         {
             return _httpContextAccessor.HttpContext.Session.Get<Quiz>("CurrentQuiz");
