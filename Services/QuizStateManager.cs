@@ -24,8 +24,18 @@ namespace EducationalQuizApp.Services
         }
         public void SetQuizCategory(string category)
         {
+
             _httpContextAccessor.HttpContext.Session.SetString("QuizCategory", category);
             SaveCurrentQuiz(_quizService.GetQuizByCategory(category));
+        }
+        public bool IsQuizComplete()
+        {
+            var currentQuiz = GetCurrentQuiz();
+            if (currentQuiz == null)
+                return false;
+
+            int currentQuestionIndex = GetCurrentQuestionIndex();
+            return currentQuestionIndex >= currentQuiz.Questions.Count;
         }
 
         public string GetQuizCategory()
@@ -69,20 +79,17 @@ namespace EducationalQuizApp.Services
             _httpContextAccessor.HttpContext.Session.Remove("CurrentScore");
         }
 
-        public int GetScore()
+        public int GetUserScore()
         {
             return _httpContextAccessor.HttpContext.Session.GetInt32("CurrentScore") ?? 0;
         }
 
-        public void UpdateScore(int scoreToAdd)
+        public void updateUserScore(int scoreToAdd)
         {
-            var currentScore = GetScore();
+            var currentScore = GetUserScore();
             _httpContextAccessor.HttpContext.Session.SetInt32("CurrentScore", currentScore + scoreToAdd);
         }
 
-
-
     }
-
 
 }

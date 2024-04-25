@@ -15,7 +15,7 @@ public class QuizModel : PageModel
     public int SelectedAnswer { get; set; }
 
     public Quiz Quiz { get; set; }
-    public Question CurrentQuestion => Quiz.Questions.ElementAtOrDefault(_quizManager.GetCurrentQuestionIndex());
+    public Question CurrentQuestion => Quiz.Questions.ElementAtOrDefault(_quizStateManager.GetCurrentQuestionIndex());
     public string FeedbackMessage { get; set; }
     public bool? IsCorrectAnswer { get; set; } = null;
     public bool IsQuizComplete => _quizStateManager.GetCurrentQuestionIndex() >= Quiz.Questions.Count;
@@ -37,6 +37,7 @@ public class QuizModel : PageModel
         {
             _quizStateManager.SetQuizCategory(category);
         }
+
         Quiz = _quizManager.GetQuizForCategory(category);
         _quizStateManager.SaveCurrentQuiz(Quiz);
     }
@@ -49,21 +50,20 @@ public class QuizModel : PageModel
 
         if (IsCorrectAnswer == true)
         {
-            _quizStateManager.UpdateScore(1);
-            _quizStateManager.AdvanceToNextQuestion();
 
             if (IsQuizComplete)
             {
-                FeedbackMessage = $"Quiz Finished, you got {_quizStateManager.GetScore()} out of {Quiz.Questions.Count}!";
+                FeedbackMessage = $"Quiz Finished, you got {_quizStateManager.GetUserScore()} out of {Quiz.Questions.Count}!";
                 return Page();
             }
-            
-            FeedbackMessage = "Correct!";
+          
+
+            FeedbackMessage = $"Correct!";          
         }
         else
-        {
+        {           
             FeedbackMessage = $"Incorrect. The correct answer was \"{CurrentQuestion.Answers.FirstOrDefault(a => a.IsCorrect)?.AnswerText}\".";
-
+    
         }
         return Page();
 
@@ -76,14 +76,16 @@ public class QuizModel : PageModel
         return RedirectToPage("/QuizCategory");
 
     }
-
-    public IActionResult OnPostNextQuestion()
+public IActionResult OnPostNextQuestion()
+{
+    _quizStateManager.AdvanceToNextQuestion();
+    if (_quizStateManager.IsQuizComplete())
     {
-       
 
-
-
-        return RedirectToPage();              
+            return RedirectToPage("/QuizResultsPage");
     }
+    return RedirectToPage();
+}
+
 
 }

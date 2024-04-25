@@ -24,7 +24,8 @@ builder.Services.AddScoped<QuizService>();
 builder.Services.AddScoped<QuizStateManager>();
 builder.Services.AddScoped<QuizManager>();
 builder.Services.AddScoped<QuizCategoryModel>();  
-builder.Services.AddScoped<QuizEvaluator>();
+builder.Services.AddScoped<QuizResultsModel>();
+
 
 // This is required for using session state (which QuizStateManager might use).
 builder.Services.AddDistributedMemoryCache();

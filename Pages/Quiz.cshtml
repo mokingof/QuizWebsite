@@ -27,19 +27,17 @@
 }
 
 
-
 @if (Model.FeedbackMessage != null)
 {
     <div class="alert @(Model.IsCorrectAnswer.Value ? "alert-success" : "alert-danger")">
         @Model.FeedbackMessage
         @if (!Model.IsQuizComplete)
-        {
-         
+        {         
             <form method="post" asp-page-handler="NextQuestion">
                 <button type="submit" class="btn btn-primary">Next Question</button>
             </form>
         }
-       
+
     </div>
 }
 
@@ -47,7 +45,7 @@
 @if (Model.IsQuizComplete)
 {
     <div class="alert alert-success">
-        @Model.FeedbackMessage
+    
         <form method="post" asp-page-handler="Reset">
         <button type="submit" class="btn btn-primary">More Quizzes</button>
         </form>
