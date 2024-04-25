@@ -1,3 +1,4 @@
+using EducationalQuizApp.Pages;
 using EducationalQuizApp.Services;
 using EducationalQuizApp.Utilities;
 using Microsoft.AspNetCore.Builder;
@@ -19,9 +20,10 @@ builder.Logging.AddDebug();
 
 // Register services with DI container.
 
-builder.Services.AddSingleton<QuizService>();
+builder.Services.AddScoped<QuizService>();
 builder.Services.AddScoped<QuizStateManager>();
 builder.Services.AddScoped<QuizManager>();
+builder.Services.AddScoped<QuizCategoryModel>();  
 builder.Services.AddScoped<QuizEvaluator>();
 
 // This is required for using session state (which QuizStateManager might use).

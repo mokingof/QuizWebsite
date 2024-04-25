@@ -6,14 +6,14 @@ namespace EducationalQuizApp.Pages
 {
     public class QuizCategoryModel : PageModel
     {
-        private readonly QuizService _quizService;
+    
         private readonly QuizManager _quizManager;
    
 
-        public QuizCategoryModel(QuizService quizService, QuizManager _quizManager)
+        public QuizCategoryModel(QuizManager quizManager)
         {
-            _quizService = quizService;
-            _quizManager = _quizManager;
+          
+            _quizManager = quizManager;
         }
 
         public List<string> QuizCategories { get; set; }
@@ -23,6 +23,10 @@ namespace EducationalQuizApp.Pages
 
         public void OnGet()
         {
+            if (_quizManager == null)
+            {
+                throw new InvalidOperationException("QuizManager is not initialized.");
+            }
             QuizCategories = _quizManager.GetCategories();
         }
 

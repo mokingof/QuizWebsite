@@ -8,103 +8,68 @@ using System.Net.Sockets;
 
 public class QuizModel : PageModel
 {
-   
     private readonly QuizManager _quizManager;
-    private readonly QuizService _quizService;
-    private readonly QuizStateManager _stateManager;
-    private readonly QuizEvaluator _evaluator;
-    private readonly ILogger<QuizModel> _logger;
 
     [BindProperty]
     public int SelectedAnswer { get; set; }
 
-    public Quiz Quiz
-    {
-        get => _stateManager.GetCurrentQuiz();
-        set => _stateManager.SaveCurrentQuiz(value);
-    }
+    [BindProperty]
+    public string Category { get; set; }
 
-    public Question CurrentQuestion => Quiz?.Questions.ElementAtOrDefault(_stateManager.GetCurrentQuestionIndex());
-    public bool? IsCorrectAnswer { get; set; } = null;
+    public Quiz Quiz { get; set; }
+    public Question CurrentQuestion => Quiz.Questions.ElementAtOrDefault(_quizManager.GetCurrentQuestionIndex());
     public string FeedbackMessage { get; set; }
-    public int Score { get; set; }
+    public bool? IsCorrectAnswer { get; set; } = null;
+    public bool IsQuizComplete => _quizManager.GetCurrentQuestionIndex() >= Quiz.Questions.Count;
+   
 
-    public string QuizCategory
+    public QuizModel(QuizManager quizManager)
     {
-        get => _stateManager.GetQuizCategory();
-        set
-        {
-            if (value != _stateManager.GetQuizCategory())
-            {
-                _stateManager.SetQuizCategory(value);
-                Quiz = _quizService.GetQuizByCategory(value);  // Fetch new quiz based on changed category
-            }
-        }
-    }
-    public bool IsQuizComplete => _stateManager.GetCurrentQuestionIndex() >= Quiz?.Questions.Count;
-
-    public QuizModel(QuizService quizService, QuizStateManager stateManager, QuizEvaluator evaluator, ILogger<QuizModel> logger)
-    {
-        _quizService = quizService;
-        _stateManager = stateManager;
-        _evaluator = evaluator;
-        _logger = logger;
+        _quizManager = quizManager;
     }
 
     public void OnGet(string category)
     {
-        if (!string.IsNullOrEmpty(category) && category != QuizCategory)
-        {
-            QuizCategory = category; // This sets and fetches the quiz based on the new category
-        }
+        Quiz = _quizManager.GetQuizForCategory(category);
+     
     }
 
     public IActionResult OnPost()
     {
-        if (Quiz == null)
-        {
-            _logger.LogError("Quiz data is missing on POST request.");
-            return RedirectToPage("/Error");
-        }
-
-        var currentQuestionIndex = _stateManager.GetCurrentQuestionIndex();
-        var currentQuestion = Quiz.Questions[currentQuestionIndex];
-
-        //Evaluate the answer
-        IsCorrectAnswer = _evaluator.IsAnswerCorrect(currentQuestion, SelectedAnswer);
+        Quiz = _quizManager.GetQuizForCategory(Category);
+      //  Quiz = _quizManager.GetcurrentQuiz();
+        IsCorrectAnswer = _quizManager.SubmitAnswer(Quiz, SelectedAnswer);
 
         if (IsCorrectAnswer == true)
         {
-            _stateManager.AdvanceToNextQuestion();
-            _stateManager.UpdateScore(1);
-            if (_stateManager.GetCurrentQuestionIndex() >= Quiz.Questions.Count)
+         
+            if (_quizManager.IsQuizComplete(Quiz))
             {
-                Score = _stateManager.GetCurrentScore();
-                FeedbackMessage = $"Quiz finished, you got {Score} out of {Quiz.Questions.Count} questions right.";
+                FeedbackMessage = $"Quiz Finished, you got {_quizManager.GetScore()} out of {Quiz.Questions.Count}!";
                 return Page();
-            }
+            }         
+            FeedbackMessage = "Correct!";        
         }
         else
-        {   
-            FeedbackMessage = $"Incorrect. The correct answer was \"{currentQuestion.Answers.FirstOrDefault(a => a.IsCorrect)?.AnswerText}\".";
-        }
+        {            
+            FeedbackMessage = $"Incorrect. The correct answer was \"{CurrentQuestion.Answers.FirstOrDefault(a => a.IsCorrect)?.AnswerText}\".";
 
+        }
         return Page();
+
     }
 
     // Resets Quiz
     public IActionResult OnPostReset()
     {
-        _stateManager.ClearQuizData();
+        _quizManager.ResetCurrentQuiz();
         return RedirectToPage("/QuizCategory");
-       
-    }
 
+    }
+  
     public IActionResult OnPostNextQuestion()
     {
-        _logger.LogInformation("Executing OnPostNextQuestion");
-        SelectedAnswer = -1;
-        _stateManager.AdvanceToNextQuestion();  // Move to the next question
+        _quizManager.AdvanceToNextQuestion();  // Move to the next question    
         return RedirectToPage();                // Redirect to refresh the page state
     }
 

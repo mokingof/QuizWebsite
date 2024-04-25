@@ -69,14 +69,14 @@ namespace EducationalQuizApp.Services
             _httpContextAccessor.HttpContext.Session.Remove("CurrentScore");
         }
 
-        public int GetCurrentScore()
+        public int GetScore()
         {
             return _httpContextAccessor.HttpContext.Session.GetInt32("CurrentScore") ?? 0;
         }
 
         public void UpdateScore(int scoreToAdd)
         {
-            var currentScore = GetCurrentScore();
+            var currentScore = GetScore();
             _httpContextAccessor.HttpContext.Session.SetInt32("CurrentScore", currentScore + scoreToAdd);
         }
 
