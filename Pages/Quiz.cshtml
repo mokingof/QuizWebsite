@@ -34,20 +34,17 @@
         @Model.FeedbackMessage
         @if (!Model.IsQuizComplete)
         {
-            <input type="hidden" asp-for="Category" />
+         
             <form method="post" asp-page-handler="NextQuestion">
                 <button type="submit" class="btn btn-primary">Next Question</button>
             </form>
         }
-        else
-        {
-            <form method="post" asp-page-handler="Reset">
-                <button type="submit" class="btn btn-primary">More Quizzes</button>
-            </form>
-        }
+       
     </div>
 }
-else @if (Model.IsQuizComplete)
+
+
+@if (Model.IsQuizComplete)
 {
     <div class="alert alert-success">
         @Model.FeedbackMessage

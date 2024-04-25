@@ -20,10 +20,10 @@ public class QuizManager
     {
         if (category != _quizStateManager.GetQuizCategory())
         {
-            _quizStateManager.SetQuizCategory(category);
+           // _quizStateManager.SetQuizCategory(category);
             var quiz = _quizService.GetQuizByCategory(category);
-            _quizStateManager.SaveCurrentQuiz(quiz);
-            //_quizStateManager.ResetQuiz(); // Resets state relevant to the quiz, such as current question index and score
+           // _quizStateManager.SaveCurrentQuiz(quiz);
+           // _quizStateManager.ResetQuiz(); // Resets state relevant to the quiz, such as current question index and score
             return quiz;
         }
         return _quizStateManager.GetCurrentQuiz();
@@ -40,13 +40,11 @@ public class QuizManager
             var isCorrect = currentQuestion.Answers[answerIndex].IsCorrect;
             if (isCorrect)
             {
-                return true;
-            }
-            else
-            {
-                return false;
+               
+                return isCorrect;
             }
 
+        
         }
         return false;
     }

@@ -9,49 +9,59 @@ using System.Net.Sockets;
 public class QuizModel : PageModel
 {
     private readonly QuizManager _quizManager;
+    private readonly QuizStateManager _quizStateManager;
 
     [BindProperty]
     public int SelectedAnswer { get; set; }
-
-    [BindProperty]
-    public string Category { get; set; }
 
     public Quiz Quiz { get; set; }
     public Question CurrentQuestion => Quiz.Questions.ElementAtOrDefault(_quizManager.GetCurrentQuestionIndex());
     public string FeedbackMessage { get; set; }
     public bool? IsCorrectAnswer { get; set; } = null;
-    public bool IsQuizComplete => _quizManager.GetCurrentQuestionIndex() >= Quiz.Questions.Count;
-   
+    public bool IsQuizComplete => _quizStateManager.GetCurrentQuestionIndex() >= Quiz.Questions.Count;
 
-    public QuizModel(QuizManager quizManager)
+
+    public QuizModel(QuizManager quizManager, QuizStateManager quizStateManager)
     {
         _quizManager = quizManager;
+        _quizStateManager = quizStateManager;
     }
 
     public void OnGet(string category)
     {
+        if (string.IsNullOrEmpty(category))
+        {
+            category = _quizStateManager.GetQuizCategory();
+        }
+        else
+        {
+            _quizStateManager.SetQuizCategory(category);
+        }
         Quiz = _quizManager.GetQuizForCategory(category);
-     
+        _quizStateManager.SaveCurrentQuiz(Quiz);
     }
 
     public IActionResult OnPost()
     {
-        Quiz = _quizManager.GetQuizForCategory(Category);
-      //  Quiz = _quizManager.GetcurrentQuiz();
+
+        Quiz = _quizStateManager.GetCurrentQuiz();
         IsCorrectAnswer = _quizManager.SubmitAnswer(Quiz, SelectedAnswer);
 
         if (IsCorrectAnswer == true)
         {
-         
-            if (_quizManager.IsQuizComplete(Quiz))
+            _quizStateManager.UpdateScore(1);
+            _quizStateManager.AdvanceToNextQuestion();
+
+            if (IsQuizComplete)
             {
-                FeedbackMessage = $"Quiz Finished, you got {_quizManager.GetScore()} out of {Quiz.Questions.Count}!";
+                FeedbackMessage = $"Quiz Finished, you got {_quizStateManager.GetScore()} out of {Quiz.Questions.Count}!";
                 return Page();
-            }         
-            FeedbackMessage = "Correct!";        
+            }
+            
+            FeedbackMessage = "Correct!";
         }
         else
-        {            
+        {
             FeedbackMessage = $"Incorrect. The correct answer was \"{CurrentQuestion.Answers.FirstOrDefault(a => a.IsCorrect)?.AnswerText}\".";
 
         }
@@ -62,15 +72,18 @@ public class QuizModel : PageModel
     // Resets Quiz
     public IActionResult OnPostReset()
     {
-        _quizManager.ResetCurrentQuiz();
+        _quizStateManager.ResetQuiz();
         return RedirectToPage("/QuizCategory");
 
     }
-  
+
     public IActionResult OnPostNextQuestion()
     {
-        _quizManager.AdvanceToNextQuestion();  // Move to the next question    
-        return RedirectToPage();                // Redirect to refresh the page state
+       
+
+
+
+        return RedirectToPage();              
     }
 
 }

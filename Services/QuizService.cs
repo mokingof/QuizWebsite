@@ -54,7 +54,7 @@ namespace EducationalQuizApp.Services
                         QuestionText = "What is 10 - 6?",
                         Answers = new List<Answers>
                         {
-                            new Answers { AnswerText = "5", IsCorrect = true },
+                            new Answers { AnswerText = "5", IsCorrect = false },
                             new Answers { AnswerText = "4", IsCorrect = true },
                             new Answers { AnswerText = "3", IsCorrect = false }
                         }
