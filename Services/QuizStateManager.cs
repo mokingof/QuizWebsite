@@ -14,6 +14,28 @@ namespace EducationalQuizApp.Services
             _httpContextAccessor = httpContextAccessor;
             _quizService = quizService;
         }
+
+        public void SaveAnswer(int questionIndex, int answerIndex)
+        {
+            List<int> answers = GetUserAnswers() ?? new List<int>(); 
+            
+            answers[questionIndex] = answerIndex;
+            _httpContextAccessor.HttpContext.Session.SetString("UserAnswers", JsonConvert.SerializeObject(answers));
+
+        }
+
+        public List<int> GetUserAnswers()
+        {
+            string data = _httpContextAccessor.HttpContext.Session.GetString("UserAnswers");
+            if (!string.IsNullOrEmpty(data))
+            {
+                return JsonConvert.DeserializeObject<List<int>>(data);
+
+            }
+            return new List<int>();
+
+        }
+
         public void SaveCurrentQuiz(Quiz quiz)
         {
             _httpContextAccessor.HttpContext.Session.Set("CurrentQuiz", quiz);
@@ -29,23 +51,10 @@ namespace EducationalQuizApp.Services
             SaveCurrentQuiz(_quizService.GetQuizByCategory(category));
         }
        
-
         public string GetQuizCategory()
         {
             return _httpContextAccessor.HttpContext.Session.GetString("QuizCategory");
         }
-
-        public void ClearQuizData()
-        {
-            _httpContextAccessor.HttpContext.Session.Remove("CurrentQuiz");
-            _httpContextAccessor.HttpContext.Session.Remove("QuizCategory");
-        }
-
-        public bool IsQuizDataAvailable()
-        {
-            return GetCurrentQuiz() != null;
-        }
-
         public int GetCurrentQuestionIndex()
         {
             // Retrieves the current question index from the session.

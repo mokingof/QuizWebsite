@@ -46,15 +46,13 @@ public class QuizModel : PageModel
     {
 
         Quiz = _quizStateManager.GetCurrentQuiz();
+        if (Quiz == null) throw new InvalidOperationException("Quiz is not initialized in QuizModel.");
+        
         IsCorrectAnswer = _quizManager.SubmitAnswer(Quiz, SelectedAnswer);
+        _quizStateManager.SaveAnswer(_quizStateManager.GetCurrentQuestionIndex(), SelectedAnswer);
 
         if (IsCorrectAnswer == true)
         {
-
-            //if (IsQuizComplete)
-            //{
-            //    FeedbackMessage = $"Quiz Finished, you got {_quizStateManager.GetUserScore()} out of {Quiz.Questions.Count}!";
-            //    return Page();
             FeedbackMessage = $"Correct!";
             _quizManager.GiveUserPoint();
 

@@ -1,15 +1,19 @@
 ﻿@page
-@model EducationalQuizApp.Pages.QuizResultsModel
+@model QuizResultsModel
 
 
 <h2>Quiz @Model.QuizName Completed!</h2>
 
 <div class="alert alert-success">
     Congradulations! You have completed the quiz.
-    <p>Your final score is: @Model.FinalScore</p>
+    <p>Your final score is: @Model.FinalScore out of @Model.QuizSize.Questions.Count</p>
 </div>
+
+<form method="post" asp-page-handler="ShowQuiz">
+    <button type="submit" class="btn btn-primary">Review Quiz Answers</button>
+</form>
 
 
 <form method="post" asp-page-handler="Reset">
-    <button type="submit" class="btn btn-primary">More Quizzes</button>
+    <button type="submit" class="btn btn-primary">Try Another Quiz</button>
 </form>
