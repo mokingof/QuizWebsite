@@ -51,14 +51,13 @@ public class QuizModel : PageModel
         if (IsCorrectAnswer == true)
         {
 
-            if (IsQuizComplete)
-            {
-                FeedbackMessage = $"Quiz Finished, you got {_quizStateManager.GetUserScore()} out of {Quiz.Questions.Count}!";
-                return Page();
-            }
-          
+            //if (IsQuizComplete)
+            //{
+            //    FeedbackMessage = $"Quiz Finished, you got {_quizStateManager.GetUserScore()} out of {Quiz.Questions.Count}!";
+            //    return Page();
+            FeedbackMessage = $"Correct!";
+            _quizManager.GiveUserPoint();
 
-            FeedbackMessage = $"Correct!";          
         }
         else
         {           
@@ -72,17 +71,17 @@ public class QuizModel : PageModel
     // Resets Quiz
     public IActionResult OnPostReset()
     {
-        _quizStateManager.ResetQuiz();
+        
         return RedirectToPage("/QuizCategory");
 
     }
 public IActionResult OnPostNextQuestion()
 {
-    _quizStateManager.AdvanceToNextQuestion();
-    if (_quizStateManager.IsQuizComplete())
+    _quizManager.AdvanceToNextQuestion();
+    if (_quizManager.IsQuizComplete())
     {
-
-            return RedirectToPage("/QuizResultsPage");
+           // _quizStateManager.ResetQuiz();
+            return RedirectToPage("/QuizResults");
     }
     return RedirectToPage();
 }

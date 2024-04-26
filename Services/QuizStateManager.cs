@@ -28,15 +28,7 @@ namespace EducationalQuizApp.Services
             _httpContextAccessor.HttpContext.Session.SetString("QuizCategory", category);
             SaveCurrentQuiz(_quizService.GetQuizByCategory(category));
         }
-        public bool IsQuizComplete()
-        {
-            var currentQuiz = GetCurrentQuiz();
-            if (currentQuiz == null)
-                return false;
-
-            int currentQuestionIndex = GetCurrentQuestionIndex();
-            return currentQuestionIndex >= currentQuiz.Questions.Count;
-        }
+       
 
         public string GetQuizCategory()
         {

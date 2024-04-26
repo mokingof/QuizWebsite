@@ -23,10 +23,8 @@ namespace EducationalQuizApp.Pages
 
         public void OnGet()
         {
-            if (_quizManager == null)
-            {
-                throw new InvalidOperationException("QuizManager is not initialized.");
-            }
+            if (_quizManager == null) throw new InvalidOperationException("QuizManager is not initialized.");
+    
             QuizCategories = _quizManager.GetCategories();
         }
 

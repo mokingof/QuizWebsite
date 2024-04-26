@@ -38,12 +38,7 @@ public class QuizManager
             if (isCorrect)
             { 
                 return isCorrect;
-            } 
-            else
-            {
-                _quizStateManager.AdvanceToNextQuestion();
-                return false;
-            }      
+            }          
         }
         return false;
     }
@@ -51,11 +46,24 @@ public class QuizManager
     public void AdvanceToNextQuestion()
     {
         _quizStateManager.AdvanceToNextQuestion();
+      
+
+    }
+
+    public void GiveUserPoint()
+    {
         _quizStateManager.updateUserScore(1);
 
     }
 
+    public bool IsQuizComplete()
+    {
+        var currentQuiz =_quizStateManager.GetCurrentQuiz();
+        if (currentQuiz == null) return false;
 
+        int currentQuestionIndex = _quizStateManager.GetCurrentQuestionIndex();
+        return currentQuestionIndex >= currentQuiz.Questions.Count;
+    }
     //list categories
     public List<string> GetCategories()
     {
