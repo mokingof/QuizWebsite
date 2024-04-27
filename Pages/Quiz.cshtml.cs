@@ -83,7 +83,7 @@ public IActionResult OnPostNextQuestion()
     _quizManager.AdvanceToNextQuestion();
     if (_quizManager.IsQuizComplete())
     {
-           // _quizStateManager.ResetQuiz();
+            
             return RedirectToPage("/QuizResults");
     }
     return RedirectToPage();

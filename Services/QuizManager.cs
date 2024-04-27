@@ -38,8 +38,7 @@ public class QuizManager
             if (selectedAnswer != null)
             {
                 if (selectedAnswer.IsCorrect)
-                {
-                    Console.WriteLine(answerId);
+                {       
                     return true;
                 }
             }
@@ -47,12 +46,10 @@ public class QuizManager
         return false;
     }
 
-
     public void AdvanceToNextQuestion()
     {
         _quizStateManager.AdvanceToNextQuestion();
       
-
     }
 
     public void GiveUserPoint()
@@ -60,7 +57,7 @@ public class QuizManager
         _quizStateManager.updateUserScore(1);
 
     }
-
+   
     public bool IsQuizComplete()
     {
         var currentQuiz =_quizStateManager.GetCurrentQuiz();

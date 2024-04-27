@@ -1,11 +1,17 @@
 ﻿using EducationalQuizApp.Model;
 using EducationalQuizApp.Utilities;
-using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 using Newtonsoft.Json;
 namespace EducationalQuizApp.Services
 {
     public class QuizStateManager
     {
+        private const string UserAnswerKey = "UserAnswers";     
+        private const string QuizCategoryKey = "QuizCategory";
+        private const string CurrentQuizKey = "CurrentQuiz";
+        private const string CurrentQuestionIndexKey = "CurrentQuestionIndex";
+        private const string CurrentScoreKey = "CurrentScore";
+
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly QuizService _quizService;
 
