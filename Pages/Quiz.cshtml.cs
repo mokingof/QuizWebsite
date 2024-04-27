@@ -12,7 +12,7 @@ public class QuizModel : PageModel
     private readonly QuizStateManager _quizStateManager;
 
     [BindProperty]
-    public int SelectedAnswer { get; set; }
+    public int? SelectedAnswer { get; set; }
 
     public Quiz Quiz { get; set; }
     public Question CurrentQuestion => Quiz.Questions.ElementAtOrDefault(_quizStateManager.GetCurrentQuestionIndex());
@@ -44,26 +44,31 @@ public class QuizModel : PageModel
 
     public IActionResult OnPost()
     {
-
         Quiz = _quizStateManager.GetCurrentQuiz();
         if (Quiz == null) throw new InvalidOperationException("Quiz is not initialized in QuizModel.");
-        
-        IsCorrectAnswer = _quizManager.SubmitAnswer(Quiz, SelectedAnswer);
-        _quizStateManager.SaveAnswer(_quizStateManager.GetCurrentQuestionIndex(), SelectedAnswer);
+
+        if (!SelectedAnswer.HasValue)
+        {
+            FeedbackMessage = "please select an answer before submitting.";
+            return Page();
+        }
+
+
+        IsCorrectAnswer = _quizManager.SubmitAnswer(Quiz, SelectedAnswer.Value);
+        _quizStateManager.SaveAnswer(_quizStateManager.GetCurrentQuestionIndex(), SelectedAnswer.Value);
 
         if (IsCorrectAnswer == true)
         {
-            FeedbackMessage = $"Correct!";
+            FeedbackMessage = "Correct!";
             _quizManager.GiveUserPoint();
-
         }
         else
-        {           
-            FeedbackMessage = $"Incorrect. The correct answer was \"{CurrentQuestion.Answers.FirstOrDefault(a => a.IsCorrect)?.AnswerText}\".";
-    
+        {
+            // Find the correct answer's text to display in feedback
+            var correctAnswerText = CurrentQuestion.Answer.FirstOrDefault(a => a.IsCorrect)?.AnswerText;
+            FeedbackMessage = $"Incorrect. The correct answer was \"{correctAnswerText}\".";
         }
         return Page();
-
     }
 
     // Resets Quiz

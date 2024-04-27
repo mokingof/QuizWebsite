@@ -1,54 +1,47 @@
 ﻿@page
 @model QuizModel
 
+
 @if (Model.CurrentQuestion != null)
 {
     <form method="post">
-      
         <h2>@Model.Quiz.Title</h2>
-        
         <div>
             <p>@Model.CurrentQuestion.QuestionText</p>
-            @for (int i = 0; i < Model.CurrentQuestion.Answers.Count; i++)
+            @foreach (var answer in Model.CurrentQuestion.Answer)
             {
                 <div class="form-group">
-                    <input type="radio" asp-for="SelectedAnswer" value="@i" name="SelectedAnswer"
-                    disabled="@(Model.FeedbackMessage != null)"/>
-                    <label>@Model.CurrentQuestion.Answers[i].AnswerText</label>
+                    <input type="radio" asp-for="SelectedAnswer" value="@answer.Id" name="SelectedAnswer"
+                           disabled="@(Model.IsQuizComplete)" />
+                    <label>@answer.AnswerText</label>
                 </div>
             }
         </div>
-        @if(Model.FeedbackMessage == null)
+        @if (Model.FeedbackMessage == null || !Model.IsCorrectAnswer.HasValue)
         {
             <button type="submit" class="btn btn-primary">Submit</button>
         }
-      
     </form>
 }
 
-
 @if (Model.FeedbackMessage != null)
 {
-    <div class="alert @(Model.IsCorrectAnswer.Value ? "alert-success" : "alert-danger")">
+    <div class="alert @((Model.IsCorrectAnswer.HasValue && Model.IsCorrectAnswer.Value) ? "alert-success" : "alert-danger")">
         @Model.FeedbackMessage
-        @if (!Model.IsQuizComplete)
-        {         
+        @if (Model.IsCorrectAnswer.HasValue && !Model.IsQuizComplete)
+        {
             <form method="post" asp-page-handler="NextQuestion">
                 <button type="submit" class="btn btn-primary">Next Question</button>
             </form>
         }
-
     </div>
 }
-
 
 @if (Model.IsQuizComplete)
 {
     <div class="alert alert-success">
-    
         <form method="post" asp-page-handler="Reset">
-        <button type="submit" class="btn btn-primary">More Quizzes</button>
+            <button type="submit" class="btn btn-primary">More Quizzes</button>
         </form>
     </div>
 }
-

@@ -42,7 +42,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is 5 + 3?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "8", IsCorrect = true, Id = 1},
                             new Answers { AnswerText = "7", IsCorrect = false, Id = 2},
@@ -52,7 +52,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is 10 - 6?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "5", IsCorrect = false, Id = 4 },
                             new Answers { AnswerText = "4", IsCorrect = true, Id = 5 },
@@ -62,7 +62,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is 7 x 6?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "42", IsCorrect = true, Id = 7 },
                             new Answers { AnswerText = "48", IsCorrect = false, Id = 8 },
@@ -80,7 +80,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What planet is known as the Red Planet?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "Jupitor", IsCorrect = true, Id = 10 },
                             new Answers { AnswerText = "Mars", IsCorrect = true , Id = 11},
@@ -90,7 +90,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What gas do plants absorb from the atmosphere?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "Carbon Dioxide", IsCorrect = true, Id = 13 },
                             new Answers { AnswerText = "Oxygen", IsCorrect = false, Id = 14 },
@@ -100,7 +100,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is the boiling point of water?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "100 degrees Celsius", IsCorrect = true, Id = 16 },
                             new Answers { AnswerText = "90 degrees Celsius", IsCorrect = false, Id = 17 },
@@ -118,7 +118,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "Which nutrient plays an essential role in muscle-building?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "Proteins", IsCorrect = true, Id = 19 },
                             new Answers { AnswerText = "Carbohydrates", IsCorrect = false, Id = 20 },
@@ -128,17 +128,17 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is the normal human body temperature in degrees Celsius?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
-                            new Answers { AnswerText = "40", IsCorrect = true, Id = 22 },
-                            new Answers { AnswerText = "35", IsCorrect = false, Id = 23 },
-                            new Answers { AnswerText = "37", IsCorrect = true, Id = 24 }
+                            new Answers { AnswerText = "40C", IsCorrect = true, Id = 22 },
+                            new Answers { AnswerText = "35C", IsCorrect = false, Id = 23 },
+                            new Answers { AnswerText = "37C", IsCorrect = true, Id = 24 }
                         }
                     },
                     new Question
                     {
                         QuestionText = "Which vitamin is most commonly associated with citrus fruits?",
-                        Answers = new List<Answers>
+                        Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "Vitamin D", IsCorrect = false, Id = 25},
                             new Answers { AnswerText = "Vitamin C", IsCorrect = true, Id = 26 },

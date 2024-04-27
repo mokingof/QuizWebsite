@@ -15,25 +15,22 @@ namespace EducationalQuizApp.Services
             _quizService = quizService;
         }
 
-        public void SaveAnswer(int questionIndex, int answerIndex)
+        // Dictionary to store answers with the question ID as the key
+        public void SaveAnswer(int questionId, int answerId)
         {
-            List<int> answers = GetUserAnswers() ?? new List<int>(); 
-            
-            answers[questionIndex] = answerIndex;
+            Dictionary<int, int> answers = GetUserAnswers() ?? new Dictionary<int, int>();
+            answers[questionId] = answerId;
             _httpContextAccessor.HttpContext.Session.SetString("UserAnswers", JsonConvert.SerializeObject(answers));
-
         }
 
-        public List<int> GetUserAnswers()
+        public Dictionary<int, int> GetUserAnswers()
         {
             string data = _httpContextAccessor.HttpContext.Session.GetString("UserAnswers");
             if (!string.IsNullOrEmpty(data))
             {
-                return JsonConvert.DeserializeObject<List<int>>(data);
-
+                return JsonConvert.DeserializeObject<Dictionary<int,int>>(data);
             }
-            return new List<int>();
-
+            return new Dictionary<int, int>();
         }
 
         public void SaveCurrentQuiz(Quiz quiz)
@@ -78,6 +75,7 @@ namespace EducationalQuizApp.Services
         {
             _httpContextAccessor.HttpContext.Session.SetInt32("CurrentQuestionIndex", 0);
             _httpContextAccessor.HttpContext.Session.Remove("CurrentScore");
+            _httpContextAccessor.HttpContext.Session.Remove("UserAnswers");
         }
 
         public int GetUserScore()

@@ -27,22 +27,27 @@ public class QuizManager
     }
 
     // Evaluate an answer and return true if correct, false otherwise
-    public bool SubmitAnswer(Quiz quiz, int answerIndex)
+    public bool SubmitAnswer(Quiz quiz, int answerId)
     {
         if (quiz == null) throw new InvalidOperationException("Quiz is not initialized in QuizManager.");
 
         var currentQuestion = quiz.Questions.ElementAtOrDefault(_quizStateManager.GetCurrentQuestionIndex());
-        if (currentQuestion != null && answerIndex >= 0 && answerIndex < currentQuestion.Answers.Count)
+        if (currentQuestion != null)
         {
-            var isCorrect = currentQuestion.Answers[answerIndex].IsCorrect;
-            if (isCorrect)
-            { 
-                return isCorrect;
-            }          
+            var selectedAnswer = currentQuestion.Answer.FirstOrDefault(a => a.Id == answerId);
+            if (selectedAnswer != null)
+            {
+                if (selectedAnswer.IsCorrect)
+                {
+                    Console.WriteLine(answerId);
+                    return true;
+                }
+            }
         }
         return false;
     }
-    
+
+
     public void AdvanceToNextQuestion()
     {
         _quizStateManager.AdvanceToNextQuestion();

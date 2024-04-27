@@ -19,7 +19,7 @@ namespace EducationalQuizApp.Pages
         public void OnGet()
         {
             Quiz = _quizStateManager.GetCurrentQuiz();
-            UserAnswers = _quizStateManager.GetUserAnswers();
+          //  UserAnswers = _quizStateManager.GetUserAnswers();
 
         }
 
