@@ -60,7 +60,7 @@ public class QuizModel : PageModel
         if (IsCorrectAnswer == true)
         {
             FeedbackMessage = "Correct!";
-            _quizManager.GiveUserPoint();
+         
         }
         else
         {
@@ -71,23 +71,17 @@ public class QuizModel : PageModel
         return Page();
     }
 
-    // Resets Quiz
-    public IActionResult OnPostReset()
-    {
-        
-        return RedirectToPage("/QuizCategory");
 
-    }
-public IActionResult OnPostNextQuestion()
-{
-    _quizManager.AdvanceToNextQuestion();
-    if (_quizManager.IsQuizComplete())
+    public IActionResult OnPostNextQuestion()
     {
-            
+        _quizManager.AdvanceToNextQuestion();
+        if (_quizManager.IsQuizComplete())
+        {
+
             return RedirectToPage("/QuizResults");
+        }
+        return RedirectToPage();
     }
-    return RedirectToPage();
-}
 
 
 }

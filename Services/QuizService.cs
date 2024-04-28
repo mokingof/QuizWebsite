@@ -42,7 +42,9 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is 5 + 3?",
+                        Id = 1,
                         Answer = new List<Answers>
+                        
                         {
                             new Answers { AnswerText = "8", IsCorrect = true, Id = 1},
                             new Answers { AnswerText = "7", IsCorrect = false, Id = 2},
@@ -52,6 +54,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is 10 - 6?",
+                        Id = 2,
                         Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "5", IsCorrect = false, Id = 4 },
@@ -62,6 +65,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is 7 x 6?",
+                        Id = 3,
                         Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "42", IsCorrect = true, Id = 7 },
@@ -80,6 +84,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What planet is known as the Red Planet?",
+                        Id = 4,
                         Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "Jupitor", IsCorrect = true, Id = 10 },
@@ -90,6 +95,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What gas do plants absorb from the atmosphere?",
+                        Id = 5,
                         Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "Carbon Dioxide", IsCorrect = true, Id = 13 },
@@ -100,6 +106,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is the boiling point of water?",
+                        Id = 6,
                         Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "100 degrees Celsius", IsCorrect = true, Id = 16 },
@@ -118,6 +125,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "Which nutrient plays an essential role in muscle-building?",
+                        Id = 7,
                         Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "Proteins", IsCorrect = true, Id = 19 },
@@ -128,6 +136,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "What is the normal human body temperature in degrees Celsius?",
+                        Id = 8,
                         Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "40C", IsCorrect = true, Id = 22 },
@@ -138,6 +147,7 @@ namespace EducationalQuizApp.Services
                     new Question
                     {
                         QuestionText = "Which vitamin is most commonly associated with citrus fruits?",
+                        Id = 9,
                         Answer = new List<Answers>
                         {
                             new Answers { AnswerText = "Vitamin D", IsCorrect = false, Id = 25},

@@ -1,5 +1,6 @@
 ﻿using EducationalQuizApp.Model;
 using EducationalQuizApp.Services;
+using EducationalQuizApp.Utilities;
 using System.Collections.Generic;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -38,7 +39,8 @@ public class QuizManager
             if (selectedAnswer != null)
             {
                 if (selectedAnswer.IsCorrect)
-                {       
+                {
+                    _quizStateManager.UpdateUserScore(1);
                     return true;
                 }
             }
@@ -52,12 +54,6 @@ public class QuizManager
       
     }
 
-    public void GiveUserPoint()
-    {
-        _quizStateManager.updateUserScore(1);
-
-    }
-   
     public bool IsQuizComplete()
     {
         var currentQuiz =_quizStateManager.GetCurrentQuiz();

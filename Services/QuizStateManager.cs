@@ -89,7 +89,7 @@ namespace EducationalQuizApp.Services
             return _httpContextAccessor.HttpContext.Session.GetInt32(CurrentScoreKey) ?? 0;
         }
 
-        public void updateUserScore(int scoreToAdd)
+        public void UpdateUserScore(int scoreToAdd)
         {
             var currentScore = GetUserScore();
             _httpContextAccessor.HttpContext.Session.SetInt32(CurrentScoreKey, currentScore + scoreToAdd);
