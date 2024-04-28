@@ -1,17 +1,17 @@
 ﻿@page
 @model QuizModel
 
-<div class="container my-5">
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1 class="quiz-title">@Model.Quiz.Title</h1>
+    </div>
     <div class="card bg-dark text-white">
-        <div class="card-header bg-primary">
-            <h1 class="text-center mb-0">@Model.Quiz.Title</h1>
-        </div>
         <div class="card-body">
             @if (Model.CurrentQuestion != null)
             {
                 <form method="post">
                     <div class="mb-4">
-                        <h5>@Model.CurrentQuestion.QuestionText</h5>
+                        <h5 class="question-text">@Model.CurrentQuestion.QuestionText</h5>
                     </div>
                     <input type="hidden" asp-for="QuestionId" value="@Model.CurrentQuestion.Id" />
                     <div class="answer-choices">
@@ -22,7 +22,7 @@
                                 <label for="answer-@answer.Id" class="answer-label">
                                     <div class="card bg-secondary">
                                         <div class="card-body">
-                                            @answer.AnswerText
+                                            <span class="answer-text">@answer.AnswerText</span>
                                         </div>
                                     </div>
                                 </label>
@@ -41,11 +41,11 @@
             @if (Model.FeedbackMessage != null)
             {
                 <div class="alert mt-4 @((Model.IsCorrectAnswer.HasValue && Model.IsCorrectAnswer.Value) ? "answer-correct" : "answer-incorrect")">
-                    @Model.FeedbackMessage
+                    <p class="feedback-message">@Model.FeedbackMessage</p>
                     @if (Model.IsCorrectAnswer.HasValue && !Model.IsQuizComplete)
                     {
-                        <form method="post" asp-page-handler="NextQuestion" class="mt-3">
-                            <button type="submit" class="btn btn-primary">Next Question</button>
+                        <form method="post" asp-page-handler="NextQuestion" class="next-question-button">
+                            <button type="submit" class="next-question-button" style="vertical-align:middle"><span>>Next Question</span></button>
                         </form>
                     }
                 </div>
