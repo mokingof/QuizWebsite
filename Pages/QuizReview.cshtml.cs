@@ -10,6 +10,7 @@ namespace EducationalQuizApp.Pages
         private readonly QuizStateManager _quizStateManager;
 
         public Quiz Quiz {  get; private set; }
+        public string QuizName { get; private set; }
         public Dictionary<int,int> UserAnswers { get; private set; }
      
         public QuizReviewModel(QuizStateManager quizStateManager)
@@ -18,6 +19,7 @@ namespace EducationalQuizApp.Pages
         }
         public void OnGet()
         {
+            QuizName = _quizStateManager.GetQuizCategory();
             Quiz = _quizStateManager.GetCurrentQuiz();
             UserAnswers = _quizStateManager.GetUserAnswers();
 

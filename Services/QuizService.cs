@@ -87,7 +87,7 @@ namespace EducationalQuizApp.Services
                         Id = 4,
                         Answer = new List<Answers>
                         {
-                            new Answers { AnswerText = "Jupitor", IsCorrect = true, Id = 10 },
+                            new Answers { AnswerText = "Jupitor", IsCorrect = false, Id = 10 },
                             new Answers { AnswerText = "Mars", IsCorrect = true , Id = 11},
                             new Answers { AnswerText = "Saturn", IsCorrect = false , Id = 12}
                         }
@@ -109,9 +109,9 @@ namespace EducationalQuizApp.Services
                         Id = 6,
                         Answer = new List<Answers>
                         {
-                            new Answers { AnswerText = "100 degrees Celsius", IsCorrect = true, Id = 16 },
-                            new Answers { AnswerText = "90 degrees Celsius", IsCorrect = false, Id = 17 },
-                            new Answers { AnswerText = "110 degrees Celsius", IsCorrect = false, Id = 18 }
+                            new Answers { AnswerText = "100C", IsCorrect = true, Id = 16 },
+                            new Answers { AnswerText = "90C", IsCorrect = false, Id = 17 },
+                            new Answers { AnswerText = "110C", IsCorrect = false, Id = 18 }
                         }
                     }
                 }
@@ -139,7 +139,7 @@ namespace EducationalQuizApp.Services
                         Id = 8,
                         Answer = new List<Answers>
                         {
-                            new Answers { AnswerText = "40C", IsCorrect = true, Id = 22 },
+                            new Answers { AnswerText = "40C", IsCorrect = false, Id = 22 },
                             new Answers { AnswerText = "35C", IsCorrect = false, Id = 23 },
                             new Answers { AnswerText = "37C", IsCorrect = true, Id = 24 }
                         }

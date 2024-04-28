@@ -1,48 +1,64 @@
 ﻿@page
 @model QuizModel
 
-
-@if (Model.CurrentQuestion != null)
-{
-    <form method="post">
-        <h2>@Model.Quiz.Title</h2>
-        <div>
-            <p>@Model.CurrentQuestion.QuestionText</p>
-            @foreach (var answer in Model.CurrentQuestion.Answer)
+<div class="container my-5">
+    <div class="card bg-dark text-white">
+        <div class="card-header bg-primary">
+            <h1 class="text-center mb-0">@Model.Quiz.Title</h1>
+        </div>
+        <div class="card-body">
+            @if (Model.CurrentQuestion != null)
             {
-                <div class="form-group">
+                <form method="post">
+                    <div class="mb-4">
+                        <h5>@Model.CurrentQuestion.QuestionText</h5>
+                    </div>
                     <input type="hidden" asp-for="QuestionId" value="@Model.CurrentQuestion.Id" />
-                    <input type="radio" asp-for="SelectedAnswer" value="@answer.Id" name="SelectedAnswer"
-                           disabled="@(Model.IsQuizComplete)" />
-                    <label>@answer.AnswerText</label>
+                    <div class="answer-choices">
+                        @foreach (var answer in Model.CurrentQuestion.Answer)
+                        {
+                            <div class="answer-choice">
+                                <input type="radio" asp-for="SelectedAnswer" id="answer-@answer.Id" value="@answer.Id" name="SelectedAnswer" disabled="@(Model.IsQuizComplete)" class="answer-radio">
+                                <label for="answer-@answer.Id" class="answer-label">
+                                    <div class="card bg-secondary">
+                                        <div class="card-body">
+                                            @answer.AnswerText
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                    @if (Model.FeedbackMessage == null || !Model.IsCorrectAnswer.HasValue)
+                    {
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    }
+                </form>
+            }
+
+            @if (Model.FeedbackMessage != null)
+            {
+                <div class="alert mt-4 @((Model.IsCorrectAnswer.HasValue && Model.IsCorrectAnswer.Value) ? "answer-correct" : "answer-incorrect")">
+                    @Model.FeedbackMessage
+                    @if (Model.IsCorrectAnswer.HasValue && !Model.IsQuizComplete)
+                    {
+                        <form method="post" asp-page-handler="NextQuestion" class="mt-3">
+                            <button type="submit" class="btn btn-primary">Next Question</button>
+                        </form>
+                    }
+                </div>
+            }
+
+            @if (Model.IsQuizComplete)
+            {
+                <div class="alert alert-success mt-4">
+                    <form method="post" asp-page-handler="Reset">
+                        <button type="submit" class="btn btn-primary">More Quizzes</button>
+                    </form>
                 </div>
             }
         </div>
-        @if (Model.FeedbackMessage == null || !Model.IsCorrectAnswer.HasValue)
-        {
-            <button type="submit" class="btn btn-primary">Submit</button>
-        }
-    </form>
-}
-
-@if (Model.FeedbackMessage != null)
-{
-    <div class="alert @((Model.IsCorrectAnswer.HasValue && Model.IsCorrectAnswer.Value) ? "alert-success" : "alert-danger")">
-        @Model.FeedbackMessage
-        @if (Model.IsCorrectAnswer.HasValue && !Model.IsQuizComplete)
-        {
-            <form method="post" asp-page-handler="NextQuestion">
-                <button type="submit" class="btn btn-primary">Next Question</button>
-            </form>
-        }
     </div>
-}
-
-@if (Model.IsQuizComplete)
-{
-    <div class="alert alert-success">
-        <form method="post" asp-page-handler="Reset">
-            <button type="submit" class="btn btn-primary">More Quizzes</button>
-        </form>
-    </div>
-}
+</div>

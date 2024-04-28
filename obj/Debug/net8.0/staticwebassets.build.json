@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XjhL5XWXijZ4FBGF5KQ6UBIa/2ORV/BeITxSoWrBW2U=",
+  "Hash": "ZbeN+AQZQCGcL675n2jaSPi4muyvwQOISHYnjqMuwck=",
   "Source": "EducationalQuizApp",
   "BasePath": "_content/EducationalQuizApp",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\EducationalQuizApp.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\custom.css",
+      "SourceId": "EducationalQuizApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\",
+      "BasePath": "_content/EducationalQuizApp",
+      "RelativePath": "css/custom.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\custom.css"
     },
     {
       "Identity": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\site.css",

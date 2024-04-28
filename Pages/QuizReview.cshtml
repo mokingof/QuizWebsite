@@ -1,26 +1,45 @@
 ﻿@page
 @model QuizReviewModel
 
-<h2>Quiz Review</h2>
-
-@foreach (var question in Model.Quiz.Questions)
-{
-    <div>
-        <h3>@question.QuestionText</h3>
-        <ul>
-            @foreach (var answer in question.Answer)
+<div class="container my-5">
+    <div class="card bg-dark text-white">
+        <div class="card-header bg-primary">
+            <h1 class="text-center mb-0">Quiz Review: @Model.QuizName</h1>
+        </div>
+        <div class="card-body">
+            @foreach (var question in Model.Quiz.Questions)
             {
-                var isUserAnswer = Model.UserAnswers.ContainsKey(question.Id) && Model.UserAnswers[question.Id] == answer.Id;
-                var isCorrectAnswer = answer.IsCorrect;
-                <li class="@((isUserAnswer ? (isCorrectAnswer ? "text-success" : "text-danger") : ""))">
-                    @answer.AnswerText
-                    @(isUserAnswer ? " - Your Answer" : "")
-                    @(isCorrectAnswer ? " - Correct Answer" : "")
-                </li>
+                <div class="card bg-secondary mb-4">
+                    <div class="card-header">
+                        <h5>@question.QuestionText</h5>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var answer in question.Answer)
+                        {
+                            var isUserAnswer = Model.UserAnswers.ContainsKey(question.Id) && Model.UserAnswers[question.Id] == answer.Id;
+                            var isCorrectAnswer = answer.IsCorrect;
+                            <div class="answer-choice mb-2">
+                                <span class="answer-text @(isUserAnswer ? (isCorrectAnswer ? "answer-correct" : "text-danger") : "text-white")">
+                                    @answer.AnswerText
+                                    @if (isUserAnswer && !isCorrectAnswer)
+                                    {
+                                        <span> - Your Answer</span>
+                                        
+                                    }
+                                    @if (isCorrectAnswer)
+                                    {
+                                        <span> - Correct Answer</span>
+                                    }
+                                </span>
+                            </div>
+                        }
+                    </div>
+                </div>
             }
-        </ul>
+
+            <form method="post" asp-page-handler="Reset">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">More Quizzes</button>
+            </form>
+        </div>
     </div>
-}
-<form method="post" asp-page-handler="Reset">
-    <button type="submit" class="btn btn-primary">More Quizzes</button>
-</form>
+</div>
