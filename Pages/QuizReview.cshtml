@@ -3,17 +3,14 @@
 
 <h2>Quiz Review</h2>
 
-@for (int i = 0; i < Model.Quiz.Questions.Count; i++)
+@foreach (var question in Model.Quiz.Questions)
 {
-    var question = Model.Quiz.Questions[i];
-    var userAnswerId = Model.UserAnswers.Count > i ? Model.UserAnswers[i] : -1; // Gets the user's answer ID or -1 if none
-
     <div>
         <h3>@question.QuestionText</h3>
         <ul>
             @foreach (var answer in question.Answer)
             {
-                var isUserAnswer = answer.Id == userAnswerId;
+                var isUserAnswer = Model.UserAnswers.ContainsKey(question.Id) && Model.UserAnswers[question.Id] == answer.Id;
                 var isCorrectAnswer = answer.IsCorrect;
                 <li class="@((isUserAnswer ? (isCorrectAnswer ? "text-success" : "text-danger") : ""))">
                     @answer.AnswerText

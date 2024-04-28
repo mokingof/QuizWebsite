@@ -11,6 +11,7 @@
             @foreach (var answer in Model.CurrentQuestion.Answer)
             {
                 <div class="form-group">
+                    <input type="hidden" asp-for="QuestionId" value="@Model.CurrentQuestion.Id" />
                     <input type="radio" asp-for="SelectedAnswer" value="@answer.Id" name="SelectedAnswer"
                            disabled="@(Model.IsQuizComplete)" />
                     <label>@answer.AnswerText</label>

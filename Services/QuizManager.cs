@@ -53,7 +53,6 @@ public class QuizManager
         _quizStateManager.AdvanceToNextQuestion();
       
     }
-
     public bool IsQuizComplete()
     {
         var currentQuiz =_quizStateManager.GetCurrentQuiz();

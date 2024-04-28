@@ -13,6 +13,8 @@ public class QuizModel : PageModel
 
     [BindProperty]
     public int? SelectedAnswer { get; set; }
+    [BindProperty]
+    public int? QuestionId { get; set; }
 
     public Quiz Quiz { get; set; }
     public Question CurrentQuestion => Quiz.Questions.ElementAtOrDefault(_quizStateManager.GetCurrentQuestionIndex());
@@ -55,12 +57,11 @@ public class QuizModel : PageModel
 
 
         IsCorrectAnswer = _quizManager.SubmitAnswer(Quiz, SelectedAnswer.Value);
-        _quizStateManager.SaveAnswer(_quizStateManager.GetCurrentQuestionIndex(), SelectedAnswer.Value);
-
+        _quizStateManager.SaveAnswer(QuestionId.Value, SelectedAnswer.Value);
+      
         if (IsCorrectAnswer == true)
         {
             FeedbackMessage = "Correct!";
-         
         }
         else
         {
@@ -70,8 +71,6 @@ public class QuizModel : PageModel
         }
         return Page();
     }
-
-
     public IActionResult OnPostNextQuestion()
     {
         _quizManager.AdvanceToNextQuestion();
