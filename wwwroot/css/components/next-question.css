@@ -1,0 +1,40 @@
+﻿.next-question-button {
+    background-color: #212121;
+    color: #ccc;
+    border: 2px solid #ccc;
+    font-size: 28px;
+    border: 2px solid #212121;
+    width: 250px;
+}
+
+
+    .next-question-button:hover {
+        transform: scale(1.05); /* Slight increase in size on hover */
+        background-color: #ccc; /* Green */
+        color: white;
+    }
+
+    .next-question-button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .next-question-button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .next-question-button:hover span {
+        padding-right: 25px;
+    }
+
+        .next-question-button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }

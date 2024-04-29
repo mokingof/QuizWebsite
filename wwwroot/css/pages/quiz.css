@@ -1,0 +1,18 @@
+﻿.quiz-container {
+    max-width: 10000px;
+    margin: 0 auto;
+}
+
+.quiz-header {
+    background-color: #212121;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.quiz-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #ccc;
+    margin: 0;
+}

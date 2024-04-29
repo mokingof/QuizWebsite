@@ -17,8 +17,24 @@
       "PackagePath": "staticwebassets\\Images\\Screenshot 2024-04-16 211903.png"
     },
     {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\answer.css",
+      "PackagePath": "staticwebassets\\css\\answer.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\button.css",
+      "PackagePath": "staticwebassets\\css\\button.css"
+    },
+    {
       "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\custom.css",
       "PackagePath": "staticwebassets\\css\\custom.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\question.css",
+      "PackagePath": "staticwebassets\\css\\question.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\quiz.css",
+      "PackagePath": "staticwebassets\\css\\quiz.css"
     },
     {
       "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\site.css",
