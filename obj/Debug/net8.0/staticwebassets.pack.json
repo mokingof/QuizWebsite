@@ -17,24 +17,60 @@
       "PackagePath": "staticwebassets\\Images\\Screenshot 2024-04-16 211903.png"
     },
     {
-      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\answer.css",
-      "PackagePath": "staticwebassets\\css\\answer.css"
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\answer-choice.css",
+      "PackagePath": "staticwebassets\\css\\components\\answer-choice.css"
     },
     {
-      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\button.css",
-      "PackagePath": "staticwebassets\\css\\button.css"
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\button.css",
+      "PackagePath": "staticwebassets\\css\\components\\button.css"
     },
     {
-      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\custom.css",
-      "PackagePath": "staticwebassets\\css\\custom.css"
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\next-question.css",
+      "PackagePath": "staticwebassets\\css\\components\\next-question.css"
     },
     {
-      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\question.css",
-      "PackagePath": "staticwebassets\\css\\question.css"
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\question.css",
+      "PackagePath": "staticwebassets\\css\\components\\question.css"
     },
     {
-      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\quiz.css",
-      "PackagePath": "staticwebassets\\css\\quiz.css"
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\quiz-title.css",
+      "PackagePath": "staticwebassets\\css\\components\\quiz-title.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\submit.css",
+      "PackagePath": "staticwebassets\\css\\components\\submit.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\layout\\footer.css",
+      "PackagePath": "staticwebassets\\css\\layout\\footer.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\layout\\header.css",
+      "PackagePath": "staticwebassets\\css\\layout\\header.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\layout\\sidebar.css",
+      "PackagePath": "staticwebassets\\css\\layout\\sidebar.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\main.css",
+      "PackagePath": "staticwebassets\\css\\main.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\pages\\quiz-category.css",
+      "PackagePath": "staticwebassets\\css\\pages\\quiz-category.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\pages\\quiz-result.css",
+      "PackagePath": "staticwebassets\\css\\pages\\quiz-result.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\pages\\quiz-review.css",
+      "PackagePath": "staticwebassets\\css\\pages\\quiz-review.css"
+    },
+    {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\pages\\quiz.css",
+      "PackagePath": "staticwebassets\\css\\pages\\quiz.css"
     },
     {
       "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\site.css",
