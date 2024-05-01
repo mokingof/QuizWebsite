@@ -13,13 +13,15 @@
             <p>@Model.CurrentQuestion.QuestionText</p>
             @foreach (var answer in Model.CurrentQuestion.Answer)
             {
+
+
                 <div class="answer-choice">
                     <input type="hidden" asp-for="QuestionId" value="@Model.CurrentQuestion.Id" />
-                    <input type="radio" asp-for="SelectedAnswer" id="answer-@answer.Id" value="@answer.Id" name="SelectedAnswer" disabled="@(Model.IsQuizComplete)" class="answer-radio">
-                    <label for="answer-@answer.Id" class="answer-label">
+                    <input type="radio" asp-for="SelectedAnswer" id="answer-@answer.Id" value="@answer.Id" name="SelectedAnswer" disabled="@(Model.FeedbackMessage != null)" class="answer-radio">
+                    <label for="answer-@answer.Id" class="answer-label @(Model.FeedbackMessage != null && Model.SelectedAnswer != answer.Id ? "disabled" : "")">
                         <div class="card">
                             <div class="card-body">
-                                <span class="answer-text">@answer.AnswerText</span>
+                                <span class="answer-text @((Model.IsQuizComplete && answer.IsCorrect) ? "correct-answer" : "")">@answer.AnswerText</span>
                             </div>
                         </div>
                     </label>

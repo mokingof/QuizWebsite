@@ -1,6 +1,6 @@
 ﻿.answer-choice {
 /* The .answer-choice class applies a bottom margin to each answer choice container.*/
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .answer-radio {
@@ -15,7 +15,7 @@
 }
 
 .card {
-/* The .card class defines the appearance of the card, including borders, padding, 
+    /* The .card class defines the appearance of the card, including borders, padding, 
     and a transition for the hover effect.*/
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -24,14 +24,33 @@
     background-color: #212121;
     text-align: center;
     border-color: #000000;
+    
 }
 
     .card:hover {
-/* The .card:hover selector applies the hover effect, 
+        /* The .card:hover selector applies the hover effect, 
     which translates the card upward by 5 pixels using transform: translateY(-5px).*/
-        transform: translateY(-5px);
+        transform: translateY(-10px);
+        
+        box-shadow: 0 8px 16px rgba(0,0,0,1.2);
     }
 
+
+.answer-label.disabled {
+    cursor: default;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+    .answer-label.disabled .card {
+        background-color: #212121;
+        border-color: #000000;
+        box-shadow: none;
+    }
+
+    .answer-label.disabled .answer-text {
+        color: #999;
+    }
 
 
 .answer-radio:checked + .answer-label .card {
