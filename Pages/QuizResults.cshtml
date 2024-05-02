@@ -9,11 +9,19 @@
     <p>Your final score is: @Model.FinalScore out of @Model.QuizSize.Questions.Count</p>
 </div>
 
+
+<div class="button-container">
+
 <form method="post" asp-page-handler="ShowQuiz">
-    <button type="submit" class="btn btn-primary">Review Quiz Answers</button>
+    <div class="button">
+        <button type="submit" class="show edit-button">Review Quiz Answers</button>
+    </div>
 </form>
 
 
 <form method="post" asp-page-handler="Reset">
-    <button type="submit" class="btn btn-primary">Try Another Quiz</button>
+    <div class="button">
+        <button type="submit" class="show edit-button">Try Another Quiz</button>
+    </div>
 </form>
+</div>

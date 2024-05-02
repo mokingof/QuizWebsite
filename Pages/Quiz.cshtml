@@ -1,44 +1,53 @@
 ﻿@page
 @model QuizModel
 
+
 @if (Model.CurrentQuestion != null)
 {
-    <form method="post" id="quizForm">
+    <form method="post">
+
         <div class="quiz-title">
             <h2>@Model.Quiz.Title</h2>
         </div>
+
         <div>
             <p>@Model.CurrentQuestion.QuestionText</p>
             @foreach (var answer in Model.CurrentQuestion.Answer)
-            {
+            {            
                 <div class="answer-choice">
                     <input type="hidden" asp-for="QuestionId" value="@Model.CurrentQuestion.Id" />
-                    <input type="radio" asp-for="SelectedAnswer" id="answer-@answer.Id" value="@answer.Id" name="SelectedAnswer" class="answer-radio">
-                    <label for="answer-@answer.Id" class="answer-label">
+                    <input type="radio" asp-for="SelectedAnswer" id="answer-@answer.Id" value="@answer.Id" name="SelectedAnswer" disabled="@(Model.FeedbackMessage != null)" class="answer-radio">
+                    <label for="answer-@answer.Id" class="answer-label @(Model.FeedbackMessage != null && Model.SelectedAnswer != answer.Id ? "disabled" : "")">
                         <div class="card">
                             <div class="card-body">
                                 <span class="answer-text @((Model.IsQuizComplete && answer.IsCorrect) ? "correct-answer" : "")">@answer.AnswerText</span>
+  
                             </div>
                         </div>
                     </label>
                 </div>
             }
         </div>
-        <div class="button" style="display: none;" id="submitButtonContainer">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        @if (Model.FeedbackMessage == null || !Model.IsCorrectAnswer.HasValue)
+        {
+               <div class="button" style="display: none;" id="submitButtonDiv">
+                <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
+            </div>
+        }
     </form>
 }
+
+
 
 @if (Model.FeedbackMessage != null)
 {
     <div class="alert @((Model.IsCorrectAnswer.HasValue && Model.IsCorrectAnswer.Value) ? "alert-success" : "alert-danger")">
         @Model.FeedbackMessage
         @if (Model.IsCorrectAnswer.HasValue && !Model.IsQuizComplete)
-        {
+        {   
             <form method="post" asp-page-handler="NextQuestion">
-                <div class="button">
-                    <button type="submit" class="btn btn-primary">Next Question</button>
+                <div class="button">              
+                <button type="submit" class="btn btn-primary">Next Question</button>
                 </div>
             </form>
         }
@@ -53,18 +62,15 @@
         </form>
     </div>
 }
-
 <script>
-    document.querySelectorAll('.answer-radio').forEach(radio => {
-        radio.addEventListener('change', toggleSubmitButton);
+    document.addEventListener('DOMContentLoaded', function() {
+        var radioButtons = document.querySelectorAll('input[type="radio"]');
+        var submitButtonDiv = document.getElementById('submitButtonDiv');
+
+        radioButtons.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                submitButtonDiv.style.display = 'block';
+            });
+        });
     });
-
-    function toggleSubmitButton() {
-        const submitButtonContainer = document.getElementById('submitButtonContainer');
-        const selectedAnswer = document.querySelector('input[name="SelectedAnswer"]:checked');
-        submitButtonContainer.style.display = selectedAnswer ? 'block' : 'none';
-    }
-
-    // Initially, hide the submit button
-    toggleSubmitButton();
 </script>

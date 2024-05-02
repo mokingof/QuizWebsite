@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\css\\components\\answer-choice.css"
     },
     {
+      "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\button-container.css",
+      "PackagePath": "staticwebassets\\css\\components\\button-container.css"
+    },
+    {
       "Id": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\button.css",
       "PackagePath": "staticwebassets\\css\\components\\button.css"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LM8mvRg5G6wlXAXBzpS4WG5CVH97e73QPZsWp7yzTUs=",
+  "Hash": "zjg+7JwoELPvo2Sg4utnrLJsTVoD9jAlmnRYJRxvivE=",
   "Source": "EducationalQuizApp",
   "BasePath": "_content/EducationalQuizApp",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\components\\button.css"
+    },
+    {
+      "Identity": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\button-container.css",
+      "SourceId": "EducationalQuizApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\",
+      "BasePath": "_content/EducationalQuizApp",
+      "RelativePath": "css/components/button-container.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\components\\button-container.css"
     },
     {
       "Identity": "C:\\Users\\abdill\\source\\repos\\EducationalQuizWebApp\\EducationalQuizApp\\wwwroot\\css\\components\\next-question.css",
