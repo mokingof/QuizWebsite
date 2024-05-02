@@ -1,24 +1,20 @@
 ﻿@page
 @model QuizModel
 
-
 @if (Model.CurrentQuestion != null)
 {
-    <form method="post">
+    <form method="post" id="quizForm">
         <div class="quiz-title">
             <h2>@Model.Quiz.Title</h2>
         </div>
-
         <div>
             <p>@Model.CurrentQuestion.QuestionText</p>
             @foreach (var answer in Model.CurrentQuestion.Answer)
             {
-
-
                 <div class="answer-choice">
                     <input type="hidden" asp-for="QuestionId" value="@Model.CurrentQuestion.Id" />
-                    <input type="radio" asp-for="SelectedAnswer" id="answer-@answer.Id" value="@answer.Id" name="SelectedAnswer" disabled="@(Model.FeedbackMessage != null)" class="answer-radio">
-                    <label for="answer-@answer.Id" class="answer-label @(Model.FeedbackMessage != null && Model.SelectedAnswer != answer.Id ? "disabled" : "")">
+                    <input type="radio" asp-for="SelectedAnswer" id="answer-@answer.Id" value="@answer.Id" name="SelectedAnswer" class="answer-radio">
+                    <label for="answer-@answer.Id" class="answer-label">
                         <div class="card">
                             <div class="card-body">
                                 <span class="answer-text @((Model.IsQuizComplete && answer.IsCorrect) ? "correct-answer" : "")">@answer.AnswerText</span>
@@ -28,10 +24,9 @@
                 </div>
             }
         </div>
-        @if (Model.FeedbackMessage == null || !Model.IsCorrectAnswer.HasValue)
-        {
+        <div class="button" style="display: none;" id="submitButtonContainer">
             <button type="submit" class="btn btn-primary">Submit</button>
-        }
+        </div>
     </form>
 }
 
@@ -42,7 +37,9 @@
         @if (Model.IsCorrectAnswer.HasValue && !Model.IsQuizComplete)
         {
             <form method="post" asp-page-handler="NextQuestion">
-                <button type="submit" class="btn btn-primary">Next Question</button>
+                <div class="button">
+                    <button type="submit" class="btn btn-primary">Next Question</button>
+                </div>
             </form>
         }
     </div>
@@ -56,3 +53,18 @@
         </form>
     </div>
 }
+
+<script>
+    document.querySelectorAll('.answer-radio').forEach(radio => {
+        radio.addEventListener('change', toggleSubmitButton);
+    });
+
+    function toggleSubmitButton() {
+        const submitButtonContainer = document.getElementById('submitButtonContainer');
+        const selectedAnswer = document.querySelector('input[name="SelectedAnswer"]:checked');
+        submitButtonContainer.style.display = selectedAnswer ? 'block' : 'none';
+    }
+
+    // Initially, hide the submit button
+    toggleSubmitButton();
+</script>

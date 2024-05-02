@@ -53,8 +53,10 @@ public class QuizModel : PageModel
         {
             FeedbackMessage = "please select an answer before submitting.";
             return Page();
-        }
+        } else
+        {
 
+        }
 
         IsCorrectAnswer = _quizManager.SubmitAnswer(Quiz, SelectedAnswer.Value);
         _quizStateManager.SaveAnswer(QuestionId.Value, SelectedAnswer.Value);
@@ -69,6 +71,7 @@ public class QuizModel : PageModel
             var correctAnswerText = CurrentQuestion.Answer.FirstOrDefault(a => a.IsCorrect)?.AnswerText;
             FeedbackMessage = $"Incorrect. The correct answer was \"{correctAnswerText}\".";
         }
+          ViewData["OnSubmitAttribute"] = FeedbackMessage != null ? "onsubmit=\"disableRadioButtons()\"" : "";
         return Page();
     }
     public IActionResult OnPostNextQuestion()
@@ -81,6 +84,7 @@ public class QuizModel : PageModel
         }
         return RedirectToPage();
     }
+
 
 
 }
