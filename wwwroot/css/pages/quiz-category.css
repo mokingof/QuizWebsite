@@ -1,1 +1,43 @@
 ﻿
+.card-category {
+    font-size: 30px;
+    display: inline-block;
+    padding: 20px 60px;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    width: 500px;
+    height: 80px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-category {
+    cursor: pointer;
+    display: block;
+    width: 100%; /* or adjust based on layout */
+    margin: 0.5rem 0;
+    padding: 1rem;
+    background-color: #121212;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    
+}
+
+    .card-category:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        
+    }
+
+    .card-category.selected {
+        background-color: #302e47; /* Highlight color for selected card */
+        color: #fff;
+       
+    }
+
+
+

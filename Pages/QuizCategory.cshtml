@@ -3,15 +3,53 @@
 @{
     <h2>Select a Quiz Category</h2>
 
-    <form method="post">
-        <div class="form-group">
-            <label for="category">Category</label>
-            <select asp-for="SelectedCategory" asp-items="@(new SelectList(Model.QuizCategories))" class="form-control" id="category">
-                <option value="">Please select a category</option>
-            </select>
-        </div>
-        <div class="button">
-        <button type="submit" class="btn btn-primary">Start Quiz</button>
+    <form method="post" class="form-quiz">
+        @foreach (var category in Model.QuizCategories)
+        {
+            <div class="card-category" onclick="selectCategory('@category', this)">
+                @category
+            </div>
+        }
+        <input type="hidden" id="SelectedCategory" name="SelectedCategory" value="" />
+        <div class="button" id="submitButtonDiv">
+            <button type="submit" class="btn btn-primary" id="startQuizButton">Start Quiz</button>
         </div>
     </form>
+
 }
+
+<script>
+    function selectCategory(category, element) {
+        // Clear selection from all cards
+        document.querySelectorAll('.card-category').forEach(card => {
+            card.classList.remove('selected');
+        });
+
+        // Mark the clicked card as selected
+        element.classList.add('selected');
+
+        // Update hidden input's value
+        document.getElementById('SelectedCategory').value = category;
+
+        // Enable the submit button
+        document.getElementById('startQuizButton').disabled = false;
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var categoryCards = document.querySelectorAll('.card-category');
+        var submitButtonDiv = document.getElementById('submitButtonDiv');
+
+        // Initially hide the submit button
+        submitButtonDiv.style.display = 'none';
+
+        categoryCards.forEach(function (card) {
+            card.addEventListener('click', function () {
+                // Show the submit button when any card is clicked
+                submitButtonDiv.style.display = 'block';
+            });
+        });
+    });
+</script>
+

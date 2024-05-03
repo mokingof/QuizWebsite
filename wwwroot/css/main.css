@@ -66,6 +66,7 @@ p {
 
 .button {
     text-align: var(--text-align);
+    font-family: var(--font-family);
 }
 
 
