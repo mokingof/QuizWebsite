@@ -1,1 +1,47 @@
-﻿
+﻿/* Styling for quiz cards */
+.quiz-card {
+    background-color: #212121;
+    border: 1px solid rgba(0,0,0,0.125);
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.quiz-card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    margin-bottom: 1rem;
+}
+
+/* List styling without bullets */
+.list-unstyled {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+    /* Styling individual answers */
+    .list-unstyled li {
+        padding: 0.5rem 0; /* Padding for better readability */
+        border-bottom: 1px solid #ccc; /* Light grey border for separation */
+    }
+
+        /* Remove the border from the last item to maintain clean design */
+        .list-unstyled li:last-child {
+            border-bottom: none;
+        }
+
+/* Styles for correct and incorrect answers */
+.text-success {
+    color: #28a745; /* Green for correct answers */
+    font-weight: bold;
+}
+
+.text-danger {
+    color: #dc3545; /* Red for incorrect answers */
+    font-weight: bold;
+}
+

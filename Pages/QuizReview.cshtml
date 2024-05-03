@@ -5,24 +5,26 @@
 
 @foreach (var question in Model.Quiz.Questions)
 {
-    <div>
-        <h3>@question.QuestionText</h3>
-        <ul>
-            @foreach (var answer in question.Answer)
-            {
-                var isUserAnswer = Model.UserAnswers.ContainsKey(question.Id) && Model.UserAnswers[question.Id] == answer.Id;
-                var isCorrectAnswer = answer.IsCorrect;
-                <li class="@((isUserAnswer ? (isCorrectAnswer ? "text-success" : "text-danger") : ""))">
-                    @answer.AnswerText
-                    @(isUserAnswer ? " - Your Answer" : "")
-                    @(isCorrectAnswer ? " - Correct Answer" : "")
-                </li>
-            }
-        </ul>
+    <div class="quiz-card my-3">
+        <div class="quiz-card-body">
+            <h3 class="card-title">@question.QuestionText</h3>
+            <ul class="list-unstyled">
+                @foreach (var answer in question.Answer)
+                {
+                    var isUserAnswer = Model.UserAnswers.ContainsKey(question.Id) && Model.UserAnswers[question.Id] == answer.Id;
+                    var isCorrectAnswer = answer.IsCorrect;
+                    <li class="@(isUserAnswer ? (isCorrectAnswer ? "text-success" : "text-danger") : "")">
+                        @answer.AnswerText
+                        @(isUserAnswer ? " - Your Answer" : "")
+                        @(isCorrectAnswer ? " - Correct Answer" : "")
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 }
 <form method="post" asp-page-handler="Reset">
-    <div class="button">
-    <button type="submit" class="btn btn-primary">More Quizzes</button>
+    <div class="button text-center">
+        <button type="submit" class="btn btn-primary">More Quizzes</button>
     </div>
 </form>
